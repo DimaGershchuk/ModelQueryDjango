@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Список Вчителів{% endblock %}
+
+{% block content %}
+    <div class="teacher-list">
+    <h1>Список Вчителів</h1>
+    <ul>
+        {% for teacher in teachers %}
+            <p><strong>{{ teacher.full_name }}</strong></p>
+            <p>Предмет: {{ teacher.subject }}</p>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Список Класів{% endblock %}
+
+{% block content %}
+    <div class="class-info">
+    <h1>Список Класів</h1>
+    <ul>
+        {% for class_detail in class_details %}
+             <p><strong>Назва класу: {{ class_detail.name }}</strong></p>
+             <p>Вчитель: {{ class_detail.teacher.full_name }}</p>
+        {% endfor %}
+    </ul>
+    </div>
+{% endblock %}

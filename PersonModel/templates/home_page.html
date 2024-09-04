@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}Головна сторінка{% endblock %}
+
+{% block content %}
+    <section class="home-section">
+        <h1>Ласкаво просимо на наш сайт!</h1>
+        <p>Це головна сторінка, де ви можете знайти корисну інформацію про наші класи, вчителів та студентів.</p>
+        
+        <div class="home-cards">
+            <div class="card">
+                <h2>Вчителі</h2>
+                <p>Дізнайтеся більше про наших вчителів і перегляньте їх профілі.</p>
+                <a href="{% url 'teacher_list' %}" class="btn">Переглянути вчителів</a>
+            </div>
+            
+            <div class="card">
+                <h2>Класи</h2>
+                <p>Ознайомтеся з нашими класами та знайдіть потрібну інформацію.</p>
+                <a href="{% url 'class_details_list' %}" class="btn">Переглянути класи</a>
+            </div>
+            
+            <div class="card">
+                <h2>Студенти</h2>
+                <p>Подивіться список студентів, що навчаються в наших класах.</p>
+                <a href="{% url 'student_list' %}" class="btn">Переглянути студентів</a>
+            </div>
+        </div>
+
+         <h1>Інформація про класи</h1>
+
+    <div class="table-info">
+    <table>
+        <thead>
+            <tr>
+                <th>Назва Класу</th>
+                <th>Середній Вік Студентів</th>
+                <th>Кількість Студентів</th>
+                <th>Кількість Унікальних Вчителів</th>
+                <th>Загальна Кількість Відвідувань</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for class_stat in class_stats %}
+                <tr>
+                    <td>{{ class_stat.name }}</td>
+                    <td>{{ class_stat.average_age }}</td>
+                    <td>{{ class_stat.student_count }}</td>
+                    <td>{{ class_stat.unique_teacher }}</td>
+                    <td>{{ class_stat.total_attendance }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+        <div class="overall-info>">
+        <h2>Загальна Статистика</h2>
+    <ul>
+        <li>Мінімальний вік студентів: {{ overall_stats.min_age }}</li>
+        <li>Максимальний вік студентів: {{ overall_stats.max_age }}</li>
+        <li>Загальна кількість відвідувань: {{ overall_stats.total_attendance }}</li>
+        <li>Середня кількість відвідувань: {{ overall_stats.average_attendance }}</li>
+        <li>Кількість повнолітніх учнів: {{ overall_stats.adult_count }}</li>
+        <li>Кількість неповнолітніх учнів: {{ overall_stats.minor_count }}</li>
+        <li>Середня кількість відвідувань повнолітніх учнів: {{ overall_stats.adult_avg_attendance }}</li>
+        <li>Середня кількість відвідувань неповнолітніх учнів: {{ overall_stats.minor_avg_attendance }}</li>
+    </ul>
+
+        <h2>Студенти з відвідуваністю понад середню по класу</h2>
+    <ul>
+        {% for student in students_above_avg_attendance %}
+            <li>{{ student.full_name }} (Клас: {{ student.class_details.name }}, Відвідуваність: {{ student.attendance }})</li>
+        {% empty %}
+
+            <li>Немає студентів з відвідуваністю вище середньої по класу.</li>
+    </ul>
+        {% endfor %}
+        </div>
+    </section>
+
+{% endblock %}

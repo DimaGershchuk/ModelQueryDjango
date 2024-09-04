@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Мій сайт{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <ul class="navbar-menu">
+                    <li><a href="{% url 'home' %}">Головна</a></li>
+                    <li><a href="{% url 'teacher_list' %}">Вчителі</a></li>
+                    <li><a href="{% url 'class_details_list' %}">Класи</a></li>
+                    <li><a href="{% url 'student_list' %}">Студенти</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="content">
+        <div class="container">
+            {% block content %}
+            <!-- Вміст сторінки -->
+            {% endblock %}
+        </div>
+    </main>
+
+</body>
+</html>

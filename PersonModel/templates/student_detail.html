@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Список Студентів{% endblock %}
+
+{% block content %}
+    <div class="student-info">
+    <h1>Список Студентів</h1>
+    <ul>
+        {% for student in students %}
+            <p><strong>{{ student.full_name }}</strong></p>
+                <p>Вік: {{ student.age }}</p>
+                <p>Клас: {{ student.class_details.name }}</p>
+                <p>Відвідуваність: {{ student.attendance }}%</p>
+        {% endfor %}
+    </ul>
+        </div>
+{% endblock %}
